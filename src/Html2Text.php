@@ -420,9 +420,13 @@ class Html2Text
         } elseif ($linkMethod == 'nextline') {
             return $display . "\n[" . $url . ']';
         } else { // link_method defaults to inline
-            // IAH - use < > with spaces around URL to avoid copy/paste
-            // or bad parsing errors
-            return $display . ' < ' . $url . ' >';
+            // don't repeat url if url and text are the same
+            if (trim($link) == trim($display)) {
+                return $display;
+            }
+            // otherwise return url without any surrounding formatting
+            // it just confuses - just ensure there is whitespace
+            return $display . ' ' . $url . ' ';
         }
     }
 
