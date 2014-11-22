@@ -421,16 +421,19 @@ class Html2Text
             return $display . "\n[" . $url . ']';
         } else { // link_method defaults to inline
             // IAH
+
+            // add # to url to help with copy/paste going to far
+            $safeUrl = $url;
+            if (strstr($safeUrl, '#') === false) {
+                $safeUrl .= '#';
+            }
+
             // don't repeat url if url and text are the same
             if (trim($display) == $url) {
-                return $display;
+                return $safeUrl;
             }
             // otherwise return url without any surrounding formatting
-            // delimit with # if not already used to help with copy/paste errors
-            if (strstr($url, '#') === false) {
-                $url .= '#';
-            }
-            return $display . ' ' . $url . ' ';
+            return $display . ' ' . $safeUrl . ' ';
         }
     }
 
