@@ -422,12 +422,12 @@ class Html2Text
         } else { // link_method defaults to inline
             // IAH
             // don't repeat url if url and text are the same
-            if (trim($link) == trim($display)) {
+            if (trim($display) == $url) {
                 return $display;
             }
             // otherwise return url without any surrounding formatting
             // delimit with # if not already used to help with copy/paste errors
-            if (!strstr($url, '#') === false) {
+            if (strstr($url, '#') === false) {
                 $url .= '#';
             }
             return $display . ' ' . $url . ' ';
